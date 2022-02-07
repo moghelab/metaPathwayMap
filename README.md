@@ -26,3 +26,59 @@ python metaPathwayMap.py -pwy pathways.dat.cid.all -canopus massbank_compound_ca
 ```
 
 5. The script outputs status messages that tell you which file is the most relevant (*.top.format.abbr.tab)<br/>
+
+### Explanation of script functions and output files:
+There are multiple output files produced through these scripts, including intermediate files showing how the data was processed. The following files are most consequential for the user
+
+--- ***step1_getCompoundIDs.py***
+This script performs the following steps:
+* Extracts Chebi IDs of compounds from the pathways.dat and compounds.dat files
+* Produces an output with the extension ***cid***. If the option ***extra=yes*** is specified, then SMILES of compounds without ChEBI IDs are extracted into files with extensions ***nochebi.****
+
+--- ***step2_getCompoundAnnot.py***
+This script performs the following steps:
+* Reads ChemOnt annotations of individual ChEBI IDs from the ChemOnt files
+* Associates these annotations with ChEBI IDs extracted from pathways files in step1
+* Creates output files ****.all*** and ****.all.cpd***. The format of the ****.all*** file is as follows:
+
+ | Column 1 | Column 2 | Column 3 | Column 4 |
+ |----------|----------|----------|----------|
+ | PathwayID | Pathway name | All compounds in that pathway in a Python list object | All unique ChemOntCategories in a Python list object |
+ 
+ The compounds entries in column 3 are in the following format:
+ 
+ ***CompoundName|CompoundChEBI-ID|ChemOnt|ChemOntName*** e.g. 'D-LACTATE|16004|CHEMONTID:0000129|Alcohols_and_polyols
+ 
+ The format of the ****.all.cpd*** file is as follows:
+
+ | Column 1 | Column 2 | Column 3 |
+ |----------|----------|----------|
+ | CompoundNameCompoundChEBI-ID | ChemOnt | All pathways the compound is present in, in a Python list object |
+ 
+
+--- ***step3_getSimilarPathways.py***
+This script performs the following steps:
+* Reads in the ****.all*** file produced by step2
+* Computes Jaccard coefficient between all-vs-all pathway comparisons
+* Prints a tab-delimited file  ****.pwy.dist*** with pairwise distances (1-Jaccard coefficient)
+* Randomly resamples 1000 pathway pairs 10,000 times, and each time computes the mean Jaccard distance of the entire distribution. Based on the 10,000 mean values, obtains the 1st percentile of the distribution
+* Using this threshold (boot) or another fixed threshold (fixed), filters the pwy.dist file, producing ****.pwy.dist.boot.fil*** or ****pwy.dist.fixed020.fil*** files
+* Some additional ****.complex*** files are also produced, which list which all pathways are similar to a given pathway. The format of these files is:
+
+ | Column 1 | Column 2 | Column 3 |
+ |----------|----------|----------|
+ | Pathway name | Number of similar pathways | List of similar pathways, based on threshold |
+ 
+* Creates a ****.network*** file that can be used as input for Cytoscape
+* Using the Python networkx module, identifies connected components
+* The ****.components*** file has the following format
+
+ | Column 1 | Column 2 | Column 3 |
+ |----------|----------|----------|
+ | Component-ID | Number of pathways | Pathway IDs in a Python list object |
+ 
+****.boot.fil.network***
+
+This file can be used as input to cytoscape. 
+
+****
