@@ -30,15 +30,15 @@ python metaPathwayMap.py -pwy pathways.dat.cid.all -canopus massbank_compound_ca
 ## Explanation of script functions and output files
 There are multiple output files produced through these scripts, including intermediate files showing how the data was processed. The following files are most consequential for the user
 
-### wrapper.py
+### get_similar_pathways_wrapper.py
 Runs step1-4 one after the other
 
-### step1_getCompoundIDs.py
+### get_similar_pathways_step1_getCompoundIDs.py
 This script performs the following steps:
 * Extracts Chebi IDs of compounds from the pathways.dat and compounds.dat files
 * Produces an output with the extension ***cid***. If the option ***extra=yes*** is specified, then SMILES of compounds without ChEBI IDs are extracted into files with extensions ***nochebi.****
 
-### step2_getCompoundAnnot.py
+### get_similar_pathways_step2_getCompoundAnnot.py
 This script performs the following steps:
 * Reads ChemOnt annotations of individual ChEBI IDs from the ChemOnt files
 * Associates these annotations with ChEBI IDs extracted from pathways files in step1
@@ -59,7 +59,7 @@ This script performs the following steps:
  | CompoundNameCompoundChEBI-ID | ChemOnt | All pathways the compound is present in, in a Python list object |
  
 
-### step3_getSimilarPathways.py
+### get_similar_pathways_step3_getSimilarPathways.py
 This script performs the following steps:
 * Reads in the ****.all*** file produced by step2
 * Computes Jaccard coefficient between all-vs-all pathway comparisons
@@ -80,9 +80,14 @@ This script performs the following steps:
  |----------|----------|----------|
  | Component-ID | Number of pathways | Pathway IDs in a Python list object |
  
-### step4_topClasses.py
+### get_similar_pathways_step4_topClasses.py
 This script performs the following steps:
 * Reads in the ****.all*** and ****.components*** file produced by previous scripts
-* Identifies enriched ChemOnt categories in each connected component
+* Identifies enriched ChemOnt categories in each connected component, using the fisher.exact function of the Python module Scipy.stats
+* Produces file ****.enriched*** and ****.enriched.complex***. The enriched file has the following format. Only p-vlaues < 0.01 are output. No multiple testing correction is performed as of now. 
 
-****
+ | Column 1 | Column 2 | Column 3 | Column 4 | Column 5 | Column 6 | Column 7 | Column 8 |
+ |----------|----------|----------|----------|----------|----------|----------|----------|
+ | Component-ID | ChemOnt ID | Chemont+PWY+ | Chemont+PWY- | ChemOnt-PWY+ | ChemOnt-PWY- | p-value (fisher.exact, alternative="greater") | PWYs with ChemOnt ID |
+
+
