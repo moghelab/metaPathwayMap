@@ -1,12 +1,12 @@
 # metaPathwayMap
 Associating chemical class predictions with MetaCyc pathway models
 
-## Requirements:
+## Requirements
 Unix<br/>
 Python3<br/>
 Following python modules: Numpy, Scipy, Pandas, Networkx<br/>
 
-###Instructions for use:
+###Instructions for use
 1. Download the following files into the working directory:<br/>
   a. All scripts in the /scripts folder<br/>
   b. All files in the /OtherRequiredFiles folder. You will need to unzip the zipped file.<br/>
@@ -27,15 +27,18 @@ python metaPathwayMap.py -pwy pathways.dat.cid.all -canopus massbank_compound_ca
 
 5. The script outputs status messages that tell you which file is the most relevant (*.top.format.abbr.tab)<br/>
 
-## Explanation of script functions and output files:
+## Explanation of script functions and output files
 There are multiple output files produced through these scripts, including intermediate files showing how the data was processed. The following files are most consequential for the user
 
---- ***step1_getCompoundIDs.py***
+### wrapper.py
+Runs step1-4 one after the other
+
+### step1_getCompoundIDs.py
 This script performs the following steps:
 * Extracts Chebi IDs of compounds from the pathways.dat and compounds.dat files
 * Produces an output with the extension ***cid***. If the option ***extra=yes*** is specified, then SMILES of compounds without ChEBI IDs are extracted into files with extensions ***nochebi.****
 
---- ***step2_getCompoundAnnot.py***
+### step2_getCompoundAnnot.py
 This script performs the following steps:
 * Reads ChemOnt annotations of individual ChEBI IDs from the ChemOnt files
 * Associates these annotations with ChEBI IDs extracted from pathways files in step1
@@ -56,7 +59,7 @@ This script performs the following steps:
  | CompoundNameCompoundChEBI-ID | ChemOnt | All pathways the compound is present in, in a Python list object |
  
 
---- ***step3_getSimilarPathways.py***
+### step3_getSimilarPathways.py
 This script performs the following steps:
 * Reads in the ****.all*** file produced by step2
 * Computes Jaccard coefficient between all-vs-all pathway comparisons
@@ -77,8 +80,9 @@ This script performs the following steps:
  |----------|----------|----------|
  | Component-ID | Number of pathways | Pathway IDs in a Python list object |
  
-****.boot.fil.network***
-
-This file can be used as input to cytoscape. 
+### step4_topClasses.py
+This script performs the following steps:
+* Reads in the ****.all*** and ****.components*** file produced by previous scripts
+* Identifies enriched ChemOnt categories in each connected component
 
 ****
