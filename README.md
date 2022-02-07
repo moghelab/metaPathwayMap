@@ -1,12 +1,12 @@
 # metaPathwayMap
 Associating chemical class predictions with MetaCyc pathway models
 
-### Requirements:
+## Requirements:
 Unix<br/>
 Python3<br/>
 Following python modules: Numpy, Scipy, Pandas, Networkx<br/>
 
-### Instructions for use:
+###Instructions for use:
 1. Download the following files into the working directory:<br/>
   a. All scripts in the /scripts folder<br/>
   b. All files in the /OtherRequiredFiles folder. You will need to unzip the zipped file.<br/>
@@ -27,7 +27,7 @@ python metaPathwayMap.py -pwy pathways.dat.cid.all -canopus massbank_compound_ca
 
 5. The script outputs status messages that tell you which file is the most relevant (*.top.format.abbr.tab)<br/>
 
-### Explanation of script functions and output files:
+## Explanation of script functions and output files:
 There are multiple output files produced through these scripts, including intermediate files showing how the data was processed. The following files are most consequential for the user
 
 --- ***step1_getCompoundIDs.py***
