@@ -9,9 +9,10 @@ def help1():
     print ("-jaccard:   Threshold of Jaccard to use for output predictions (DEFAULT: 0.7)")
     print ("            0.6 should be the lowest. Based on our observations, predictions above 0.7 are " \
                         "generally trustworthy.")
+    print ("-log:       Log file name")
     
 #Get user inputs
-f1=""; canopus=""; thresh=0.7
+f1=""; canopus=""; logn=""; thresh=0.7
 for i in range(1,len(sys.argv)):
     if sys.argv[i]=='-pwy':
         f1=sys.argv[i+1]
@@ -21,12 +22,23 @@ for i in range(1,len(sys.argv)):
         canopus=sys.argv[i+1]
     if sys.argv[i]=='-jaccard':
         thresh=float(sys.argv[i+1])
-        
-if f1=="" or canopus=="":
+    if sys.argv[i]=='-log':
+        logn=sys.argv[i+1]
+
+def writemsg(mlist,outfile):
+    for msg in mlist:
+        print (msg)
+        outfile.write('{}\n'.format(msg))
+    return outfile
+    
+if f1=="" or canopus=="" or logn=="":
     help1()
 else:
     file1=open(f1, 'r') #PlantCyc compounds
-    user=3 #structural neighbors to pull out. Deafult: 3 is sufficient
+    logfile=open(logn, 'w')
+    logfile.write('python {}\n'.format(' '.join(sys.argv)))
+    
+    user=3 #structural neighbors to pull out. Default: 3 is sufficient
     line1=file1.readline()
     dict1={}; dict2={}
     while line1:
@@ -262,7 +274,21 @@ else:
     print (f"Easiest, most relevant output file to look at --> {canopus}.chemont.top.format.abbr.tab")
     print (f"Other files with excruciating details --> {canopus}.*")
 
+    logfile.write ("~~~~\n")
+    logfile.write (f"# of lines in CANOPUS file: {m}\n")
+    logfile.write (f"# of lines with >=3 CANOPUS levels: {n}\n")
+    logfile.write (f"# of compound match lines in OUT: {z}\n")
+    logfile.write (f"# of CANOPUS compounds with matching pathway annotations: {len(idict.keys())}\n")
+    logfile.write (f"# of CANOPUS compounds with high-conf pathway annotations: {len(toppred.keys())}\n")
+    logfile.write ("~~~~\n")
+    logfile.write (f"Easiest, most relevant output file to look at --> {canopus}.chemont.top.format.abbr.tab\n")
+    logfile.write (f"Other files with excruciating details --> {canopus}.*\n")
+
+    
+
     print ("Done!")
+    logfile.write ("Done!\n")
+    logfile.close()
 
     
     

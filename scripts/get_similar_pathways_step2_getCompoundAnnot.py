@@ -13,8 +13,9 @@ class step2:
                 D[v1].append(v2)
         return D
 
-    def getCompoundAnnot(self,name1,name2,name3):
+    def getCompoundAnnot(self,name1,name2,name3,mylog):
         print ("Step 2: Associating chemont categories to compounds...")
+        mylog.write ("Step 2: Associating chemont categories to compounds...\n")
         file1=open(name1,'r')
         line1=file1.readline()        
         dict1={}; dict2={}
@@ -23,8 +24,7 @@ class step2:
                 pass
             else:
                 tab1=line1.strip().split('\t')
-                cat=tab1[0]; tp=tab1[1]
-                #print cat, tp        
+                cat=tab1[0]; tp=tab1[1]                       
                 dict1=step2.add2dict(dict1,tp,cat)
                 if cat not in dict2:
                     dict2[cat]=tp
@@ -136,18 +136,21 @@ class step2:
                 out1.write('{}\t{}\t{}\n'.format(cpd,ont,pwy))
         out1.close()
         
-        print ("# of lines in step 1 output: ", n)
-        print ("# of lines in step 2 output: ", m)
-        print ("# of compounds in step 1 output: ", len(ydict.keys()))
-        print ("# of compounds in step 2 output with chemont IDs: ", len(xdict.keys()))
-        print ("# of chemont annotations total of all compounds: ", y)        
-        print ("Step 2 completed.")
+        msg1=("# of lines in step 1 output: {}".format(n))
+        msg2=("# of lines in step 2 output: {}".format(m))
+        msg3=("# of compounds in step 1 output: {}".format(len(ydict.keys())))
+        msg4=("# of compounds in step 2 output with chemont IDs: {}".format(len(xdict.keys())))
+        msg5=("# of chemont annotations total of all compounds: {}".format(y))
+        msg6=("Step 2 completed.")
+        print (msg1,msg2,msg3,msg4,msg5,msg6)
+        mylog.write('{}\n{}\n{}\n{}\n{}\n{}\n'.format(msg1,msg2,msg3,msg4,msg5,msg6))
 
 if __name__ == '__main__':    
     print ("INP1: ChemOnt obo.mod.tax")
     print ("INP2: Chebi -- ChemOnt (ChEBI_126_classyfire_21_annotations.csv.mod)")
-    print ("INP3: metacyc output of step1")    
-    name1=sys.argv[1]; name2=sys.argv[2],name3=sys.argv[3]
-    step1.getCompoundIDs(name1,name2,opt)
+    print ("INP3: metacyc output of step1")
+    print ("INP4: full log file name (name.log)")
+    name1=sys.argv[1]; name2=sys.argv[2],name3=sys.argv[3];mlog=sys.argv[4]
+    step1.getCompoundIDs(name1,name2,opt,mlog)
     print ("Done!")
         

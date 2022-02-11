@@ -16,7 +16,7 @@ class step4:
     def most_frequent(mylist):
         return max(set(mylist), key = mylist.count)
 
-    def getEnriched(d1, d2, d3, out):
+    def getEnriched(d1, d2, d3, out, dlog):
         allonts=list(d1.keys())
         allpwys=list(d2.keys())
         allcomp=list(d3.keys())
@@ -27,6 +27,7 @@ class step4:
             o+=1
             if o%100==0:
                 print ("Ontology categories tested: ", o)
+                dlog.write ("Ontology categories tested: {}\n".format(o))
             for compx in allcomp:
                 ont1=0; ont2=0; ont3=0; ont4=0
                 for pwyx in allpwys:
@@ -51,10 +52,11 @@ class step4:
                         else:
                             if sont not in myd[compx]:
                                 myd[compx].append(sont)
-        return out, myd
+        return out, myd, dlog
 
-    def mostFrequentClass(self,f1,f2,f3):
+    def mostFrequentClass(self,f1,f2,f3,mylog):
         print ("Step 4: Getting enriched Ontologies for each network component...")
+        mylog.write ("Step 4: Getting enriched Ontologies for each network component...\n")
 
         #First get all the Class annotations
         file1=open(f1,'r')
@@ -114,7 +116,7 @@ class step4:
         file1.close()
 
         #Calculate enrichment
-        out1,cdict=step4.getEnriched(dict1,dict2,dict3,out1)
+        out1,cdict,mylog=step4.getEnriched(dict1,dict2,dict3,out1,mylog)
         out1.close()
 
         #Write Classes to another output
@@ -135,17 +137,19 @@ class step4:
                 out1.write('{}\t{}\t{}\t{}\n'.format(comp,ncomp,olist,plist))
             line1=file1.readline()
         file1.close(); out1.close()
-        print ("Most enriched class written for each component!")        
+        print ("Most enriched class written for each component!")
+        mylog.write ("Most enriched class written for each component!\n")        
         
         
 
 if __name__ == '__main__':    
     print ("INP1: ChemOnt_2_1.obo.mod.tax.organic")
     print ("INP2: pathways.dat.cid.all")
-    print ("INP3: pathways.dat.cid.all.pwy.dist.boot.fil.components")    
+    print ("INP3: pathways.dat.cid.all.pwy.dist.boot.fil.components")
+    print ("INP4: name of the log file (e.g. name.log)")
     name1=sys.argv[1];  pfile=sys.argv[2]
-    components=sys.argv[3]
-    mostFrequentClass(name1,pfile,components)
+    components=sys.argv[3]; mlog=sys.argv[4]
+    mostFrequentClass(name1,pfile,components,mlog)
     
     print ("Done!")
         

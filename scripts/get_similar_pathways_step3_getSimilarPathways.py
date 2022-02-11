@@ -9,6 +9,10 @@ class step3:
     def __init__(self):
         pass
 
+    def makelog(msgx,outfile,val):
+        print ('{}\n'.format(msgx))
+        outfile.write('{}\n'.format(msgx))
+
     def bootstrap(mylist, func, level, resample, batch):
         vlist=[]
         for i in range(resample):
@@ -34,7 +38,7 @@ class step3:
         print (maxitem)
         sys.exit()
 
-    def getSimilarPwys(self,name1):
+    def getSimilarPwys(self,name1,mylog):
         print ("Step 3: Estimating substrate similarities between pathways...")
         file1=open(name1,'r') #Output of step2
         line1=file1.readline()
@@ -49,7 +53,7 @@ class step3:
                 if pwy not in dict1:
                     dict1[pwy]=onts
                 else:
-                    print ("Repeat: ", pwy)
+                    print ("Repeat: ", pwy); mylog.write("Repeat: {}\n".format(pwy))
             line1=file1.readline()
         file1.close()
 
@@ -99,17 +103,22 @@ class step3:
                 m+=1
                 if m%50000==0:
                     print ("Comparisons completed: ", m)
-        print ("Total comparisons (lines in OUT): ", m)
+                    mylog.write ("Comparisons completed: {}\n".format(m))
+        print ("Total comparisons (lines in OUT): ", m)        
+        mylog.write ("Total comparisons (lines in OUT): {}\n".format(m))
         file1.close(); out1.close(); out2.close()
 
         #Filter first file by 10th percentile of random bootstrap threshold
         print ("Now performing bootstrapping to determine threshold...")
+        mylog.write ("Now performing bootstrapping to determine threshold...\n")
         thresh=step3.bootstrap(slist, np.mean, 1, 10000, 1000)
         
         #thresh=0.42347 #5th percentile
         #thresh=0.258 #1st percentile
         print ("Filtering threshold = ", thresh)
-        print ("Filtering output file...")        
+        print ("Filtering output file...")
+        mylog.write ("Filtering threshold = {}\n".format(thresh))
+        mylog.write ("Filtering output file...\n")
 
         #Open and make necessary files
         file1=open(name1+".pwy.dist",'r')
@@ -162,8 +171,8 @@ class step3:
                     #out3.write('{}\t{}\t{}\n'.format(p1,p2,val))
             line1=file1.readline()
         file1.close(); out1.close() ; out2.close(); out21.close(); out11.close()
-        print ("Filtered lines in BOOTSTRAP OUT: ", n)
-        print ("Filtered lines in FIXED020 OUT: ", n2)
+        print ("Filtered lines in BOOTSTRAP OUT: ", n); mylog.write("Filtered lines in BOOTSTRAP OUT: {}\n".format(n))
+        print ("Filtered lines in FIXED020 OUT: ", n2); mylog.write("Filtered lines in FIXED020 OUT: {}\n".format(n))
 
         #Get complexity file for threshold based on random distribution
         for pwy in cdict:
@@ -193,11 +202,15 @@ class step3:
         print ("Check outputs with the extensions .pwy.dist.*")
         print ("# of connected components: ", gcount)
         print ("Step 3 completed.")
+        mylog.write ("Check outputs with the extensions .pwy.dist.*\n")
+        mylog.write ("# of connected components: {}\n".format(gcount))
+        mylog.write ("Step 3 completed.\n")
 
 if __name__ == '__main__':    
     print ("module load python/3.9.6")
-    print ("INP1: Output of step2 (*.all)")    
-    name1=sys.argv[1]
-    step1.getSimilarPwys(name1)
+    print ("INP1: Output of step2 (*.all)")
+    print ("INP2: name of the log file (e.g. name.log)")    
+    name1=sys.argv[1]; mlog=sys.argv[2]
+    step1.getSimilarPwys(name1,mlog)
     print ("Done!")
         

@@ -5,8 +5,9 @@ class step1:
     def __init__(self):
         pass
 
-    def getCompoundIDs(self,name1,name2,optional):
+    def getCompoundIDs(self,name1,name2,optional,mylog):
         print ("Step 1: Extracting compound info from Cyc files...")
+        mylog.write ("Step 1: Extracting compound info from Cyc files...")
 
         #Process the compounds file
         file1=open(name1,'r',encoding='cp1252')
@@ -37,13 +38,15 @@ class step1:
                     if cid not in dict2:
                         dict2[cid]=smiles
                     else:
-                        print ("Repeat CID smiles: ", cid)
+                        print ("Repeat CID smiles: {}\n".format(cid))
+                        mylog.write ("Repeat CID smiles: {}\n".format(cid))
                 elif line1.startswith('INCHI-KEY'):
                     inchikey=sp[1]
                     if cid not in dict3:
                         dict3[cid]=inchikey
                     else:
-                        print ("Repeat CID smiles: ", cid)
+                        print ("Repeat CID smiles: {}\n".format(cid))
+                        mylog.write("Repeat CID smiles: {}\n".format(cid))
             line1=file1.readline()
         file1.close()
 
@@ -131,21 +134,25 @@ class step1:
             line1=file1.readline()
         file1.close(); out1.close()
         
-        print ("Compounds with CHEBI ID in Cyc file: ", yeschebi)        
+        print ("Compounds with CHEBI ID in Cyc file: ", yeschebi)
+        mylog.write("Compounds with CHEBI ID in Cyc file: {}\n".format(yeschebi))
+        
         if optional=='yes':
             print ("Compounds with no CHEBI ID in Cyc file: ", nochebi)
+            mylog.write("Compounds with no CHEBI ID in Cyc file: {}".format(nochebi))
             out2.close(); out3.close(); out4.close(); out5.close()
             os.system('cut -f 1,3 {}.nochebi.smiles > {}.nochebi.smiles.2col.tsv'. \
                       format(sys.argv[2],sys.argv[2]))
             os.system('cut -f 3 {}.nochebi.inchikey > {}.nochebi.inchikey.list'. \
                       format(sys.argv[2],sys.argv[2]))
-        print ("Step 1 completed.")
+        print ("Step 1 completed."); mylog.write("Step 1 completed.\n")
 
 if __name__ == '__main__':    
     print ("INP1: compounds.dat")
     print ("INP2: pathways.dat")
     print ("INP3: Do you want Inchikey/SMILES of compounds without ChEBI ID (yes/no)")
-    name1=sys.argv[1]; name2=sys.argv[2],opt=sys.argv[3]
-    step1.getCompoundIDs(name1,name2,opt)
+    print ("INP4: full log file name (name.log)")
+    name1=sys.argv[1]; name2=sys.argv[2],opt=sys.argv[3];mlog=sys.argv[4]
+    step1.getCompoundIDs(name1,name2,opt,mlog)
     print ("Done!")
         
