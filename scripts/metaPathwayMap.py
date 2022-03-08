@@ -204,19 +204,6 @@ else:
                         overlap=numerator/min([len(annot1), len(chemont)])
                         tcoeff = numerator/denominator                        
                         tanimoto = '{:2f}'.format(tcoeff)
-                        
-
-                        if xid=='17_massbank_compounds_ChlorogenicAcidMoNA033186':
-                            if cpd=='4-COUMAROYLQUINATE|57575':
-                                print (annot, len(annot))
-                                print ('####')
-                                print (annot1, len(annot1))
-                                print ('####')
-                                print (chemont, len(chemont))
-                                print (y)
-                                print ('####')
-                                print (numerator, denominator, tcoeff, overlap)
-                                #sys.exit()                        
 
                         #Get related pathways
                         for pwyg in pwy:
