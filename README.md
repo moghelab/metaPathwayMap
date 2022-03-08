@@ -91,3 +91,14 @@ This script performs the following steps:
  | Component-ID | ChemOnt ID | Chemont+PWY+ | Chemont+PWY- | ChemOnt-PWY+ | ChemOnt-PWY- | p-value (fisher.exact, alternative="greater") | PWYs with ChemOnt ID |
 
 
+### metaPathwayMap.py
+This script performs the following steps:
+* Reads in output files produced by get_similar_pathways
+* For CANOPUS predictions, only those that have at least three main class annotations are analyzed
+* The script looks for every MetaCyc compound where at least three of the main classes match. This limits the search substantially, potentially causing false positives and negatives
+* Calculates Jaccard Coefficient (Tanimoto coefficient) between ALL (main+alternative) classes of the CANOPUS prediction and the MetaCyc compound
+* The pathways of the best matches are extracted
+* All related pathways (network components) of each of the pathways are extracted
+* All hits are outputted in various files.
+* The output file ****.metaPathwayMap*** is the final file to look at. It is also the most condensed, and if the users desire additional information and/or a view of additional complexity, the ****.chemont.top.format*** can be looked at
+* The components column refers to the component in the ****.boot.fil.components*** file created by get_similar_pathways
