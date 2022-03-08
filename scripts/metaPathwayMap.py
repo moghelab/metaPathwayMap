@@ -5,7 +5,7 @@ import numpy as np
 
 def help1():
     print ("-pwy:       pathways.dat.cid.all (output of getSimilarPathways)")
-    print ("-canopus:   CANOPUS annotations of the compounds of interest")
+    print ("-canopus:   CANOPUS annotations of the compounds of interest (adducts file)")
     print ("-jaccard:   Threshold of Jaccard to use for output predictions (DEFAULT: 0.7)")
     print ("            0.6 should be the lowest. Based on our observations, predictions above 0.7 are " \
                         "generally trustworthy.")
@@ -133,9 +133,9 @@ else:
     out31.write('#ExptID\tCANOPUS_MostSpecific\tMetaboliteMatch\tJaccard\tMetabolitesPathway\n')
 
     line1=file1.readline()
-    m=0; n=0; z=0; idict={}; cdict={}; toppred={}
+    m=0; n=0; z=0; idict={}; cdict={}; toppred={}; xdict={}
     removelist=['Chemical_entities', 'Chemical_entities"', '"Chemical_entities',
-                'Organic_compounds', '"Organic_compounds', 'Organic_compounds"']
+                'Organic_compounds', '"Organic_compounds', 'Organic_compounds"']    
     while line1:
         if line1.startswith('#') or line1.startswith('name'):
             pass
@@ -144,10 +144,22 @@ else:
             line1=line1.replace('"','')
             tab1=line1.strip().split('\t')
             #print (tab1)
-            id1=tab1[0]; form=tab1[1]; adduct=tab1[2]; mainclasses=tab1[3:8]; altclasses=tab1[8]
-            mostsp=tab1[3].replace(' ','_')
+            xid=tab1[0]; form=tab1[1]; adduct=tab1[2]; mainclasses=tab1[4:9]; altclasses=tab1[9]
+            #If same compound multiple times, rename id
+            if xid not in xdict:
+                xdict[xid]=1
+                id1='{}-1'.format(xid)                
+            else:
+                xlen=xdict[xid]+1
+                xdict[xid]=xlen
+                id1='{}-{}'.format(xid, xlen)
+                
+            mostsp=tab1[4].replace(' ','_')
             if mostsp=='':
                 mostsp='NA'
+            #print (mainclasses)
+            #print (altclasses)
+            #sys.exit()
 
             #Process names of the altclasses
             annot1=[x.replace(' ','_') for x in altclasses.split('; ')]        
@@ -178,7 +190,8 @@ else:
                     #Narrow down region based on main classes
                     for ont in annot:
                         if ont in chemont:
-                            y+=1                
+                            y+=1
+                    
                     
                     if abs(y-len(annot))<=3: #At least three good matches                        
                         #Get info about pathways
@@ -188,8 +201,22 @@ else:
                         #Calculate Tanimoto based on all annotations
                         numerator = len(set(annot1) & set(chemont))
                         denominator = len(annot1)+len(chemont)-numerator
-                        tcoeff = numerator/denominator
-                        tanimoto = '{:2f}'.format(tcoeff)                        
+                        overlap=numerator/min([len(annot1), len(chemont)])
+                        tcoeff = numerator/denominator                        
+                        tanimoto = '{:2f}'.format(tcoeff)
+                        
+
+                        if xid=='17_massbank_compounds_ChlorogenicAcidMoNA033186':
+                            if cpd=='4-COUMAROYLQUINATE|57575':
+                                print (annot, len(annot))
+                                print ('####')
+                                print (annot1, len(annot1))
+                                print ('####')
+                                print (chemont, len(chemont))
+                                print (y)
+                                print ('####')
+                                print (numerator, denominator, tcoeff, overlap)
+                                #sys.exit()                        
 
                         #Get related pathways
                         for pwyg in pwy:
@@ -226,9 +253,9 @@ else:
                     except:
                         flist0=sorted(list(cdict.keys()), reverse=True)
 
-                    #get tanimotos greater than 0.7
+                    #get tanimotos greater than user-specified threshold
                     for fx in flist0:
-                        if fx>=0.7:
+                        if fx>=thresh:
                             flist.append(fx)
 
                     #get pathway predictions for those tanimotos
@@ -264,6 +291,8 @@ else:
 
     os.system(f"sort -k5nr -t$'\t' {canopus}.chemont.top >  {canopus}.chemont.top.sort")
 
+    os.system(f'cp {canopus}.chemont.top.format.abbr.tab {canopus}.metaPathwayMap')
+
     print ("~~~~")
     print ("# of lines in CANOPUS file: ", m)
     print ("# of lines with >=3 CANOPUS levels: ", n)
@@ -272,6 +301,7 @@ else:
     print ("# of CANOPUS compounds with high-conf pathway annotations: ", len(toppred.keys()))
     print ("~~~~")
     print (f"Easiest, most relevant output file to look at --> {canopus}.chemont.top.format.abbr.tab")
+    print (f"Easiest, most relevant output file to look at (copy of above file) --> {canopus}.metaPathwayMap\n")
     print (f"Other files with excruciating details --> {canopus}.*")
 
     logfile.write ("~~~~\n")
@@ -279,9 +309,10 @@ else:
     logfile.write (f"# of lines with >=3 CANOPUS levels: {n}\n")
     logfile.write (f"# of compound match lines in OUT: {z}\n")
     logfile.write (f"# of CANOPUS compounds with matching pathway annotations: {len(idict.keys())}\n")
-    logfile.write (f"# of CANOPUS compounds with high-conf pathway annotations: {len(toppred.keys())}\n")
+    logfile.write (f"# of CANOPUS compounds with high-conf pathway annotations (>threshold): {len(toppred.keys())}\n")
     logfile.write ("~~~~\n")
     logfile.write (f"Easiest, most relevant output file to look at --> {canopus}.chemont.top.format.abbr.tab\n")
+    logfile.write (f"Easiest, most relevant output file to look at (copy of above file) --> {canopus}.metaPathwayMap\n")
     logfile.write (f"Other files with excruciating details --> {canopus}.*\n")
 
     

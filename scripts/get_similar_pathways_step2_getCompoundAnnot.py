@@ -136,14 +136,14 @@ class step2:
                 out1.write('{}\t{}\t{}\n'.format(cpd,ont,pwy))
         out1.close()
         
-        msg1=("# of lines in step 1 output: {}".format(n))
-        msg2=("# of lines in step 2 output: {}".format(m))
-        msg3=("# of compounds in step 1 output: {}".format(len(ydict.keys())))
-        msg4=("# of compounds in step 2 output with chemont IDs: {}".format(len(xdict.keys())))
-        msg5=("# of chemont annotations total of all compounds: {}".format(y))
-        msg6=("Step 2 completed.")
+        msg1=("# of lines in step 1 output: {}\n".format(n))
+        msg2=("# of lines in step 2 output: {}\n".format(m))
+        msg3=("# of compounds in step 1 output: {}\n".format(len(ydict.keys())))
+        msg4=("# of compounds in step 2 output with chemont IDs: {}\n".format(len(xdict.keys())))
+        msg5=("# of chemont annotations total of all compounds: {}\n".format(y))
+        msg6=("Step 2 completed.\n")
         print (msg1,msg2,msg3,msg4,msg5,msg6)
-        mylog.write('{}\n{}\n{}\n{}\n{}\n{}\n'.format(msg1,msg2,msg3,msg4,msg5,msg6))
+        mylog.write('{}{}{}{}{}{}'.format(msg1,msg2,msg3,msg4,msg5,msg6))
 
 if __name__ == '__main__':    
     print ("INP1: ChemOnt obo.mod.tax")

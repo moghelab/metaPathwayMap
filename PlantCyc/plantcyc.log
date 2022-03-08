@@ -1,0 +1,58 @@
+WORKING DIRECTORY: /local/storage/0_databases/4_pathways/7_PMN15/plantcyc/14.0/data
+python /home/gdm67/scripts/MogheProjects/4_metabID/get_similar_pathways_wrapper.py -cmp compounds.dat -pwy pathways.dat -rxn reactions.dat -extra no -chemont ChemOnt_2_1.obo.mod.tax.organic -chebi ChEBI_126_classyfire_21_annotations.csv.mod -log plantcyc.log
+Step 1: Extracting compound info from Cyc files...Compounds with CHEBI ID in Cyc file: 5114
+Step 1 completed.
+#####
+Step 2: Associating chemont categories to compounds...
+# of lines in step 1 output: 1164
+# of lines in step 2 output: 1021
+# of compounds in step 1 output: 2483
+# of compounds in step 2 output with chemont IDs: 2117
+# of chemont annotations total of all compounds: 125785
+Step 2 completed.
+#####
+Comparisons completed: 50000
+Comparisons completed: 100000
+Comparisons completed: 150000
+Comparisons completed: 200000
+Comparisons completed: 250000
+Comparisons completed: 300000
+Comparisons completed: 350000
+Comparisons completed: 400000
+Comparisons completed: 450000
+Comparisons completed: 500000
+Comparisons completed: 550000
+Comparisons completed: 600000
+Comparisons completed: 650000
+Comparisons completed: 700000
+Comparisons completed: 750000
+Comparisons completed: 800000
+Comparisons completed: 850000
+Comparisons completed: 900000
+Comparisons completed: 950000
+Comparisons completed: 1000000
+Total comparisons (lines in OUT): 1042441
+Now performing bootstrapping to determine threshold...
+Filtering threshold = 0.2586917100439381
+Filtering output file...
+Filtered lines in BOOTSTRAP OUT: 11123
+Filtered lines in FIXED020 OUT: 11123
+Check outputs with the extensions .pwy.dist.*
+# of connected components: 307
+Step 3 completed.
+#####
+Step 4: Getting enriched Ontologies for each network component...
+Ontology categories tested: 100
+Ontology categories tested: 200
+Ontology categories tested: 300
+Ontology categories tested: 400
+Ontology categories tested: 500
+Ontology categories tested: 600
+Ontology categories tested: 700
+Ontology categories tested: 800
+Ontology categories tested: 900
+Ontology categories tested: 1000
+Ontology categories tested: 1100
+Most enriched class written for each component!
+#####
+All steps done!

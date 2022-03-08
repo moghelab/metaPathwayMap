@@ -1,0 +1,41 @@
+WORKING DIRECTORY: /local/storage/0_databases/4_pathways/7_PMN15/brachypodiumcyc/7.0/data
+python /home/gdm67/scripts/MogheProjects/4_metabID/get_similar_pathways_wrapper.py -cmp compounds.dat -pwy pathways.dat -rxn reactions.dat -extra no -chemont ChemOnt_2_1.obo.mod.tax.organic -chebi ChEBI_126_classyfire_21_annotations.csv.mod -log brachypodiumcyc.log
+Step 1: Extracting compound info from Cyc files...Compounds with CHEBI ID in Cyc file: 1821
+Step 1 completed.
+#####
+Step 2: Associating chemont categories to compounds...
+# of lines in step 1 output: 480
+# of lines in step 2 output: 408
+# of compounds in step 1 output: 954
+# of compounds in step 2 output with chemont IDs: 906
+# of chemont annotations total of all compounds: 48175
+Step 2 completed.
+#####
+Comparisons completed: 50000
+Comparisons completed: 100000
+Comparisons completed: 150000
+Total comparisons (lines in OUT): 166464
+Now performing bootstrapping to determine threshold...
+Filtering threshold = 0.20306689998017668
+Filtering output file...
+Filtered lines in BOOTSTRAP OUT: 1768
+Filtered lines in FIXED020 OUT: 1768
+Check outputs with the extensions .pwy.dist.*
+# of connected components: 185
+Step 3 completed.
+#####
+Step 4: Getting enriched Ontologies for each network component...
+Ontology categories tested: 100
+Ontology categories tested: 200
+Ontology categories tested: 300
+Ontology categories tested: 400
+Ontology categories tested: 500
+Ontology categories tested: 600
+Ontology categories tested: 700
+Ontology categories tested: 800
+Ontology categories tested: 900
+Ontology categories tested: 1000
+Ontology categories tested: 1100
+Most enriched class written for each component!
+#####
+All steps done!

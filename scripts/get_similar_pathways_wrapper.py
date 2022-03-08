@@ -1,4 +1,4 @@
-import sys
+import sys, os
 
 #Import accessory scripts
 import get_similar_pathways_step1_getCompoundIDs
@@ -39,13 +39,19 @@ for i in range(1,len(sys.argv)):
 
 #Run steps
 if f1=="" or f2=="" or chemont=="" or chebi=="" or mainlog=="":
-    help1()    
+    help1()
+    print ("ERROR: Please provide all parameters")
+    sys.exit()
 else:
     if opt=="":
         opt='no'
+
+    #Get working directory
+    pwd=os.getcwd()
+    mainlog.write('WORKING DIRECTORY: {}\n'.format(pwd))
     mainlog.write('python {}\n'.format(' '.join(sys.argv)))
-    
     print ("#####")
+    
     #Parse pathways    
     step1.getCompoundIDs(f1,f2,opt,mainlog)    
     print ("#####"); mainlog.write("#####\n")
@@ -65,10 +71,10 @@ else:
     step4.mostFrequentClass(chemont,f3,f4,mainlog)
     print ("####"); mainlog.write("#####\n")
 
-print ("All steps done!")
-mainlog.write ("All steps done!\n")
-mainlog.close()
-print ("Check log file {} for job log".format(logn))
+    print ("All steps done!")
+    mainlog.write("All steps done!\n")
+    mainlog.close()
+    print ("Check log file {} for job log".format(logn))
 
 
 
