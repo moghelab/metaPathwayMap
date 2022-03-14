@@ -23,7 +23,7 @@ __NOTE: You need to do Step 2 only if you are working with a new PMN pathway mod
 
 4. Run the metaPathwayMap script as follows. Running the script without any options will give you information about these options. <br/>
 ```bash
-python metaPathwayMap.py -pwy pathways.dat.cid.all -canopus massbank_compound_canopus2.tab -jaccard 0.7
+python metaPathwayMap.py -pwy pathways.dat.cid.all -canopus massbank_compound_canopus2.tab -jaccard 0.6
 ```
 
 5. The script outputs status messages that tell you which file is the most relevant (*.top.format.abbr.tab)<br/>
