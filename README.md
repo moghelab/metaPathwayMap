@@ -6,6 +6,9 @@ v1.0
 
 No older versions
 
+## Alternate strategy
+The workflow below enables you to make your own pathway representations for a species present in MetaCyc/Plant Metabolic Network. If you do not need to make your own pathway representations and are satisfied with PlantCyc, BrachypodiumCyc and SolCyc, you can use the Sol Genomics Network tool (https://metapathwaymap.solgenomics.net). 
+
 ## Requirements
 Unix<br/>
 Python3<br/>
