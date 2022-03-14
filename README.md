@@ -3,6 +3,7 @@ Associating chemical class predictions with PMN pathway models
 
 ## Current version
 v1.0
+
 No older versions
 
 ## Requirements
