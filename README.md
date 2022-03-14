@@ -11,7 +11,14 @@ Following python modules: Numpy, Scipy, Pandas, Networkx<br/>
   a. All scripts in the /scripts folder<br/>
   b. All files in the /OtherRequiredFiles folder. You will need to unzip the zipped file.<br/>
   c. Example Canopus output from /Canopus_predictions folder. Not required if you have your own predictions<br/>
-  d. Pathway representation, either /PlantCyc or /SolCyc <br/>
+  d. Pathway representation, either /PlantCyc or /SolCyc <br/>  
+  ```bash
+   mkdir _workingDirectory
+   cp scripts/*.py OtherRequiredFiles/* Canopus_predictions/*.tsv PlantCyc/* _workingDirectory/
+   cd _workingDirectory
+   unzip ChEBI_126_classyfire_21_annotations.csv.zip   
+ ```     
+  
 
 __NOTE: You need to do Step 2 only if you are working with a new PMN pathway model. For PlantCyc, BrachypodiumCyc and SolCyc, the necessary output files are already provided in the respective database folder. You need to do this only once for each new PMN pathway you work with.__
 
