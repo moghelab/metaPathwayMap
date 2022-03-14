@@ -1,5 +1,5 @@
 # metaPathwayMap
-Associating chemical class predictions with MetaCyc pathway models
+Associating chemical class predictions with PMN pathway models
 
 ## Requirements
 Unix<br/>
@@ -11,14 +11,15 @@ Following python modules: Numpy, Scipy, Pandas, Networkx<br/>
   a. All scripts in the /scripts folder<br/>
   b. All files in the /OtherRequiredFiles folder. You will need to unzip the zipped file.<br/>
   c. Example Canopus output from /Canopus_predictions folder. Not required if you have your own predictions<br/>
-  d. Pathway representation, either /PlantCyc or /SolCyc (only PlantCyc available for now)<br/>
+  d. Pathway representation, either /PlantCyc or /SolCyc <br/>
 
-2. First process the Pathway database files to get them into the right format using the wrapper script. This script will create a bunch of intermediate files and pathway associations, some of which are needed by the next script. Running the script without any options will give you information about these options. <br/>
+__NOTE: You need to do Step 2 only if you are working with a new PMN pathway model. For PlantCyc, BrachypodiumCyc and SolCyc, the necessary output files are already provided in the respective database folder. You need to do this only once for each new PMN pathway you work with.__
+
+2. __(OPTIONAL)__ First process the Pathway database files to get them into the right format using the wrapper script. This script will create a bunch of intermediate files and pathway associations, some of which are needed by the next script. Running the script without any options will give you information about these options. <br/>
 ```bash
    python get_similar_pathways_wrapper.py -cmp compounds.dat -pwy pathways.dat -extra no -chemont ChemOnt_2_1.obo.mod.tax.organic -chebi ChEBI_126_classyfire_21_annotations.csv.mod
- ```
-      
-3. You can view the .network file in cytoscape if you want, to see pathway clusters<br/>
+ ```      
+3. You can view the .network file in Cytoscape if you want (Import from File...), to see pathway clusters<br/>
 
 4. Run the metaPathwayMap script as follows. Running the script without any options will give you information about these options. <br/>
 ```bash
@@ -31,7 +32,7 @@ python metaPathwayMap.py -pwy pathways.dat.cid.all -canopus massbank_compound_ca
 There are multiple output files produced through these scripts, including intermediate files showing how the data was processed. The following files are most consequential for the user
 
 ### get_similar_pathways_wrapper.py
-Runs step1-4 one after the other
+Runs step1-4 one after the other. You DO NOT need to run individual scripts listed below. Skip directly to metaPathwayMap.py.
 
 ### get_similar_pathways_step1_getCompoundIDs.py
 This script performs the following steps:
@@ -95,8 +96,8 @@ This script performs the following steps:
 This script performs the following steps:
 * Reads in output files produced by get_similar_pathways
 * For CANOPUS predictions, only those that have at least three main class annotations are analyzed
-* The script looks for every MetaCyc compound where at least three of the main classes match. This limits the search substantially, potentially causing false positives and negatives
-* Calculates Jaccard Coefficient (Tanimoto coefficient) between ALL (main+alternative) classes of the CANOPUS prediction and the MetaCyc compound
+* The script looks for every pathway compound where at least three of the main classes match. This limits the search substantially, potentially causing false positives and negatives
+* Calculates Jaccard Coefficient (Tanimoto coefficient) between ALL (main+alternative) classes of the CANOPUS prediction and the pathway compound
 * The pathways of the best matches are extracted
 * All related pathways (network components) of each of the pathways are extracted
 * All hits are outputted in various files.
