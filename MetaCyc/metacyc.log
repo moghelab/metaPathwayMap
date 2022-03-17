@@ -1,0 +1,218 @@
+WORKING DIRECTORY: /local/storage/0_databases/4_pathways/4_metacyc/v25/25.1/data
+python /home/gdm67/scripts/MogheProjects/4_metabID/get_similar_pathways_wrapper.py -cmp compounds.dat -pwy pathways.dat -extra no -chemont ChemOnt_2_1.obo.mod.tax.organic -chebi ChEBI_126_classyfire_21_annotations.csv.mod -log metacyc.log
+Step 1: Extracting compound info from Cyc files...Compounds with CHEBI ID in Cyc file: 14056
+Step 1 completed.
+#####
+Step 2: Associating chemont categories to compounds...
+# of lines in step 1 output: 3352
+# of lines in step 2 output: 3003
+# of compounds in step 1 output: 5570
+# of compounds in step 2 output with chemont IDs: 4597
+# of chemont annotations total of all compounds: 354844
+Step 2 completed.
+#####
+Comparisons completed: 50000
+Comparisons completed: 100000
+Comparisons completed: 150000
+Comparisons completed: 200000
+Comparisons completed: 250000
+Comparisons completed: 300000
+Comparisons completed: 350000
+Comparisons completed: 400000
+Comparisons completed: 450000
+Comparisons completed: 500000
+Comparisons completed: 550000
+Comparisons completed: 600000
+Comparisons completed: 650000
+Comparisons completed: 700000
+Comparisons completed: 750000
+Comparisons completed: 800000
+Comparisons completed: 850000
+Comparisons completed: 900000
+Comparisons completed: 950000
+Comparisons completed: 1000000
+Comparisons completed: 1050000
+Comparisons completed: 1100000
+Comparisons completed: 1150000
+Comparisons completed: 1200000
+Comparisons completed: 1250000
+Comparisons completed: 1300000
+Comparisons completed: 1350000
+Comparisons completed: 1400000
+Comparisons completed: 1450000
+Comparisons completed: 1500000
+Comparisons completed: 1550000
+Comparisons completed: 1600000
+Comparisons completed: 1650000
+Comparisons completed: 1700000
+Comparisons completed: 1750000
+Comparisons completed: 1800000
+Comparisons completed: 1850000
+Comparisons completed: 1900000
+Comparisons completed: 1950000
+Comparisons completed: 2000000
+Comparisons completed: 2050000
+Comparisons completed: 2100000
+Comparisons completed: 2150000
+Comparisons completed: 2200000
+Comparisons completed: 2250000
+Comparisons completed: 2300000
+Comparisons completed: 2350000
+Comparisons completed: 2400000
+Comparisons completed: 2450000
+Comparisons completed: 2500000
+Comparisons completed: 2550000
+Comparisons completed: 2600000
+Comparisons completed: 2650000
+Comparisons completed: 2700000
+Comparisons completed: 2750000
+Comparisons completed: 2800000
+Comparisons completed: 2850000
+Comparisons completed: 2900000
+Comparisons completed: 2950000
+Comparisons completed: 3000000
+Comparisons completed: 3050000
+Comparisons completed: 3100000
+Comparisons completed: 3150000
+Comparisons completed: 3200000
+Comparisons completed: 3250000
+Comparisons completed: 3300000
+Comparisons completed: 3350000
+Comparisons completed: 3400000
+Comparisons completed: 3450000
+Comparisons completed: 3500000
+Comparisons completed: 3550000
+Comparisons completed: 3600000
+Comparisons completed: 3650000
+Comparisons completed: 3700000
+Comparisons completed: 3750000
+Comparisons completed: 3800000
+Comparisons completed: 3850000
+Comparisons completed: 3900000
+Comparisons completed: 3950000
+Comparisons completed: 4000000
+Comparisons completed: 4050000
+Comparisons completed: 4100000
+Comparisons completed: 4150000
+Comparisons completed: 4200000
+Comparisons completed: 4250000
+Comparisons completed: 4300000
+Comparisons completed: 4350000
+Comparisons completed: 4400000
+Comparisons completed: 4450000
+Comparisons completed: 4500000
+Comparisons completed: 4550000
+Comparisons completed: 4600000
+Comparisons completed: 4650000
+Comparisons completed: 4700000
+Comparisons completed: 4750000
+Comparisons completed: 4800000
+Comparisons completed: 4850000
+Comparisons completed: 4900000
+Comparisons completed: 4950000
+Comparisons completed: 5000000
+Comparisons completed: 5050000
+Comparisons completed: 5100000
+Comparisons completed: 5150000
+Comparisons completed: 5200000
+Comparisons completed: 5250000
+Comparisons completed: 5300000
+Comparisons completed: 5350000
+Comparisons completed: 5400000
+Comparisons completed: 5450000
+Comparisons completed: 5500000
+Comparisons completed: 5550000
+Comparisons completed: 5600000
+Comparisons completed: 5650000
+Comparisons completed: 5700000
+Comparisons completed: 5750000
+Comparisons completed: 5800000
+Comparisons completed: 5850000
+Comparisons completed: 5900000
+Comparisons completed: 5950000
+Comparisons completed: 6000000
+Comparisons completed: 6050000
+Comparisons completed: 6100000
+Comparisons completed: 6150000
+Comparisons completed: 6200000
+Comparisons completed: 6250000
+Comparisons completed: 6300000
+Comparisons completed: 6350000
+Comparisons completed: 6400000
+Comparisons completed: 6450000
+Comparisons completed: 6500000
+Comparisons completed: 6550000
+Comparisons completed: 6600000
+Comparisons completed: 6650000
+Comparisons completed: 6700000
+Comparisons completed: 6750000
+Comparisons completed: 6800000
+Comparisons completed: 6850000
+Comparisons completed: 6900000
+Comparisons completed: 6950000
+Comparisons completed: 7000000
+Comparisons completed: 7050000
+Comparisons completed: 7100000
+Comparisons completed: 7150000
+Comparisons completed: 7200000
+Comparisons completed: 7250000
+Comparisons completed: 7300000
+Comparisons completed: 7350000
+Comparisons completed: 7400000
+Comparisons completed: 7450000
+Comparisons completed: 7500000
+Comparisons completed: 7550000
+Comparisons completed: 7600000
+Comparisons completed: 7650000
+Comparisons completed: 7700000
+Comparisons completed: 7750000
+Comparisons completed: 7800000
+Comparisons completed: 7850000
+Comparisons completed: 7900000
+Comparisons completed: 7950000
+Comparisons completed: 8000000
+Comparisons completed: 8050000
+Comparisons completed: 8100000
+Comparisons completed: 8150000
+Comparisons completed: 8200000
+Comparisons completed: 8250000
+Comparisons completed: 8300000
+Comparisons completed: 8350000
+Comparisons completed: 8400000
+Comparisons completed: 8450000
+Comparisons completed: 8500000
+Comparisons completed: 8550000
+Comparisons completed: 8600000
+Comparisons completed: 8650000
+Comparisons completed: 8700000
+Comparisons completed: 8750000
+Comparisons completed: 8800000
+Comparisons completed: 8850000
+Comparisons completed: 8900000
+Comparisons completed: 8950000
+Comparisons completed: 9000000
+Total comparisons (lines in OUT): 9018009
+Now performing bootstrapping to determine threshold...
+Filtering threshold = 0.2502345085510844
+Filtering output file...
+Filtered lines in BOOTSTRAP OUT: 97083
+Filtered lines in FIXED020 OUT: 97083
+Check outputs with the extensions .pwy.dist.*
+# of connected components: 655
+Step 3 completed.
+#####
+Step 4: Getting enriched Ontologies for each network component...
+Ontology categories tested: 100
+Ontology categories tested: 200
+Ontology categories tested: 300
+Ontology categories tested: 400
+Ontology categories tested: 500
+Ontology categories tested: 600
+Ontology categories tested: 700
+Ontology categories tested: 800
+Ontology categories tested: 900
+Ontology categories tested: 1000
+Ontology categories tested: 1100
+Most enriched class written for each component!
+#####
+All steps done!
