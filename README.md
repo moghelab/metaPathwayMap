@@ -1,5 +1,5 @@
 # metaPathwayMap
-Associating chemical class predictions with PMN pathway models
+Associating chemical class predictions with MetaCyc pathway models
 
 ## Current version
 v1.0
