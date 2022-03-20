@@ -13,6 +13,7 @@ The workflow below enables you to make your own pathway representations for a sp
 Unix<br/>
 Python3<br/>
 Following python modules: Numpy, Scipy, Pandas, Networkx<br/>
+CANOPUS output (adducts.tsv file)
 
 ## How to get CANOPUS output
 1. Get mgf format file from your LC-MS dataset. This can be obtained from any LC-MS data analysis software such as MS-DIAL and XCMS
