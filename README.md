@@ -19,7 +19,7 @@ CANOPUS output (adducts.tsv file)
 1. Get mgf format file from your LC-MS dataset. This can be obtained from any LC-MS data analysis software such as MS-DIAL and XCMS
 2. Download and install the SIRIUS software (https://bio.informatik.uni-jena.de/software/sirius/)
 3. Import the mgf file into SIRIUS
-4. Click on Compute All. You may want to choose the following parameters: SIRIUS (CHNOPS), CSI-FingerID (Bio Databases or MetaCyc or PlantCyc)
+4. Click on Compute All. You may want to choose the following parameters: SIRIUS (Select elements: CHNOPS), CSI-FingerID (Bio Databases or MetaCyc or PlantCyc)
 5. Export Summaries
 6. Ensure that in the tab-delimited file output by SIRIUS (the adducts file), the Most Specific Class is in Column 6, and subsequent annotations are after that. 
 7. Use this file as input for metaPathwayMap
