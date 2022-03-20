@@ -23,7 +23,7 @@ Following python modules: Numpy, Scipy, Pandas, Networkx<br/>
 6. Ensure that in the tab-delimited file output by SIRIUS (the adducts file), the Most Specific Class is in Column 6, and subsequent annotations are after that. 
 7. Use this file as input for metaPathwayMap
 
-###Instructions for use
+## Instructions for using metaPathwayMap
 1. Download the following files into the working directory:<br/>
   a. All scripts in the /scripts folder<br/>
   b. All files in the /OtherRequiredFiles folder. You will need to unzip the zipped file.<br/>
