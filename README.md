@@ -15,6 +15,8 @@ Python3<br/>
 Following python modules: Numpy, Scipy, Pandas, Networkx<br/>
 CANOPUS output (adducts.tsv file)
 
+The get_similar_pathways_wrapper.py script should take ~3-5 minutes to run, while the metaPathwayMap script completes in <10 seconds on a standard computer. 
+
 ## How to get CANOPUS output
 1. Get mgf format file from your LC-MS dataset. This can be obtained from any LC-MS data analysis software such as MS-DIAL and XCMS
 2. Download and install the SIRIUS software (https://bio.informatik.uni-jena.de/software/sirius/)
